@@ -9,6 +9,9 @@ class BestBooks extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.getAllBooks();
+  }
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
 
   // todo: define handler to get all books 
@@ -18,11 +21,13 @@ class BestBooks extends React.Component {
 
       let url = `${process.env.BOOK_SERVER}/books`
       let booksFromDB = await axios.get(url);
+      console.log('This is the URL', url);
+      console.log('This is books from BD', booksFromDB);
       // todo: save the response from my server to my state
       this.setState({
         books: booksFromDB.data
       })
-      console.log(books)
+
 
 
     } catch (error) {
@@ -30,9 +35,6 @@ class BestBooks extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.getAllBooks();
-  }
 
   render() {
 
