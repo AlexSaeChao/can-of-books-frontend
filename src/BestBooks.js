@@ -18,11 +18,11 @@ class BestBooks extends React.Component {
 
       let url = `${process.env.BOOK_SERVER}/books`
       let booksFromDB = await axios.get(url);
-
       // todo: save the response from my server to my state
       this.setState({
         books: booksFromDB.data
       })
+      console.log(books)
 
 
     } catch (error) {
