@@ -101,12 +101,12 @@ You don't have to ever use eject. The curated feature set is suitable for small 
 
 For each of the lab features, make an estimate of the time it will take you to complete the feature, and record your start and finish times for that feature:
 
-Name of feature: ________________________________
+Name of feature: fetching books from db
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 1hr
 
-Start time: _____
+Start time: 1715
 
-Finish time: _____
+Finish time: 1813
 
-Actual time needed to complete: _____
+Actual time needed to complete: 58 mins
