@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import Carousel from 'react-bootstrap/Carousel';
-import { Container, Form, Button, Modal, } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import ModalComponent from './ModalComponent';
+import CarouselComponent from './CarouselComponent';
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -93,48 +94,17 @@ class BestBooks extends React.Component {
 
         {this.state.books.length ? (
           <>
-            <Carousel key={this.state.carouselKey}>
-              {this.state.books.map((book) => (
-                <Carousel.Item key={book._id}>
-                  <div>
-                    <h3>{book.title}</h3>
-                    <p>Plot Summary: {book.description}</p>
-                    <p>Rating: {book.status} out of whatever you feel like.</p>
-                    <img src="https://placehold.co/400" alt="gray placeholder" />
-                  </div>
-                  <div className="deleteButton">
-                    <Carousel.Caption>
-                      <Button onClick={() => this.handleDeleteBook(book._id)}>Uncan it!</Button>
-                    </Carousel.Caption>
-                  </div>
-                </Carousel.Item>
-              ))}
-            </Carousel>
+            <CarouselComponent
+              books={this.state.books}
+              handleDeleteBook={this.handleDeleteBook}
+            />
 
-            <Modal show={showModal} onHide={this.closeModal}>
-              <Modal.Header closeButton>
-                <Modal.Title>Can some books!</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <Container className="formContainer">
-                  <Form onSubmit={this.handleBookSubmit}>
-                    <Form.Group controlId="title">
-                      <Form.Label>Title</Form.Label>
-                      <Form.Control type="text" />
-                    </Form.Group>
-                    <Form.Group controlId="description">
-                      <Form.Label>Description</Form.Label>
-                      <Form.Control type="text" />
-                    </Form.Group>
-                    <Form.Group controlId="status">
-                      <Form.Label>Status</Form.Label>
-                      <Form.Control type="number" />
-                    </Form.Group>
-                    <Button type="submit" onClick={this.closeModal}>Can it!</Button>
-                  </Form>
-                </Container>
-              </Modal.Body>
-            </Modal>
+            <ModalComponent
+              showModal={showModal}
+              closeModal={this.closeModal}
+              handleBookSubmit={this.handleBookSubmit}
+            />
+
             <Button onClick={this.openModal}>Start Canning!</Button>
           </>
         ) : (
@@ -144,7 +114,6 @@ class BestBooks extends React.Component {
     );
   }
 }
-
 
 export default BestBooks;
 
