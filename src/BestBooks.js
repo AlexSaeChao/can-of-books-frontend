@@ -10,6 +10,7 @@ class BestBooks extends React.Component {
     this.state = {
       books: [],
       showModal: false,
+      updateBookId: null
     }
   }
 
@@ -85,6 +86,35 @@ class BestBooks extends React.Component {
     }
   }
 
+  handleUpdateBook = async (event, id) => {
+    event.preventDefault();
+    const bookObj = {
+      title: event.target.title.value,
+      description: event.target.description.value,
+      status: +event.target.status.value,
+    };
+
+    try {
+      const url = `${process.env.REACT_APP_BOOK_SERVER}/books/${id}`;
+      const response = await axios.put(url, bookObj);
+
+      const updatedBooks = this.state.books.map(book => {
+        if (book._id === id) {
+          return response.data;
+        }
+        return book;
+      });
+
+      this.setState({
+        books: updatedBooks,
+        showModal: false,
+        updateBookId: null
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   render() {
     const { showModal } = this.state;
 
@@ -97,6 +127,7 @@ class BestBooks extends React.Component {
             <CarouselComponent
               books={this.state.books}
               handleDeleteBook={this.handleDeleteBook}
+              handleUpdateBook={this.handleUpdateBook}
             />
 
             <ModalComponent
